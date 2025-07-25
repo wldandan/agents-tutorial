@@ -21,10 +21,6 @@ A powerful AI agent built with Agno that analyzes and provides insights about Ha
 
 1. Clone the repository:
 
-```bash
-git clone https://github.com/Arindam200/awesome-ai-apps.git
-cd starter_ai_agents/agno_starter
-```
 
 2. Install dependencies:
 
@@ -35,7 +31,7 @@ pip install -r requirements.txt
 3. Create a `.env` file in the project root and add your Nebius API key:
 
 ```
-NEBIUS_API_KEY=your_api_key_here
+DEEPSEEK=your_api_key_here
 ```
 
 ## Usage
@@ -61,7 +57,6 @@ The agent will start with a welcome message and show available capabilities. You
 The agent is built using:
 
 - Agno framework for AI agent development
-- Nebius AI's Qwen/Qwen3-30B-A3B model
 - HackerNews Tool from Agno
 
 ## Contributing
@@ -71,4 +66,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Acknowledgments
 
 - [Agno Framework](https://www.agno.com/)
-- [Nebius AI](https://studio.nebius.ai/)
