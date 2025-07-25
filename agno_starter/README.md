@@ -15,7 +15,6 @@ A powerful AI agent built with Agno that analyzes and provides insights about Ha
 ## Prerequisites
 
 - Python 3.10 or higher
-- Nebius API key (get it from [Nebius AI Studio](https://studio.nebius.ai/))
 
 ## Installation
 
