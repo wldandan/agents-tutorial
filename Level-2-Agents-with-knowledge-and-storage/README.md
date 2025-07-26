@@ -39,7 +39,7 @@ Create a `.env` file in the project root directory (`/Users/leiw/Projects/agents
 # DeepSeek API Key
 DEEPSEEK_API_KEY=sk-***
 
-# OpenAI API Key (for embeddings if using LanceDB + OpenAI)
+# OpenAI API Key (for embeddings)
 OPENAI_API_KEY=sk-***
 ```
 
@@ -64,15 +64,55 @@ Set your DeepSeek API key:
 export DEEPSEEK_API_KEY=sk-***
 ```
 
-Run the agent:
+Run the basic agent:
 ```bash
-python level_2_agent.py
+python basic_agent.py
 ```
 
 The agent will:
 1. Load Agno documentation into the knowledge base (first run only)
 2. Ask "What is Agno?" and provide a response
 3. Save the conversation to SQLite storage
+
+### Advanced Usage
+
+The advanced agent uses LanceDB for enhanced vector storage:
+
+```bash
+# Test advanced agent with default embedder
+python test_advanced_agent_default_embedder.py
+
+# Run the advanced agent with default embedder
+python advanced_agent_default_embedder.py
+```
+
+Advanced features:
+- **LanceDB**: High-performance vector database with hybrid search
+- **Default Embeddings**: Uses Agno's default embedding system
+- **Enhanced Performance**: Better scalability and control
+- **No Complex Dependencies**: Easy to set up and run
+
+### Advanced Usage with Huggingface Embeddings
+
+The agent with embeddings uses custom Huggingface embeddings for better semantic understanding:
+
+```bash
+# Test advanced agent with Huggingface embeddings
+python test_advanced_agent_huggingface_embeddings.py
+
+# Run the advanced agent with Huggingface embeddings
+python advanced_agent_huggingface_embeddings.py
+
+# Demo Huggingface embeddings functionality
+python demo_huggingface_embeddings.py
+```
+
+Embeddings features:
+- **Huggingface Embeddings**: Custom sentence-transformers/all-MiniLM-L6-v2 model
+- **LanceDB**: High-performance vector database with hybrid search
+- **Semantic Understanding**: Better text similarity and search
+- **Fallback System**: Robust hash-based embedding if Huggingface fails
+- **Local Processing**: No dependency on OpenAI for embeddings
 
 ### Key Features
 
@@ -85,21 +125,40 @@ The agent will:
 
 ```
 Level-2-Agents-with-knowledge-and-storage/
-├── level_2_agent.py        # Main agent implementation
-├── test_agent.py           # Test script for verification
-├── requirements.txt        # Python dependencies
-├── README.md              # This file
-├── tmp/                   # Generated files (auto-created)
-│   └── agent.db          # SQLite session storage
-└── .gitignore             # Git ignore file
+├── basic_agent.py                      # Basic Level 2 agent implementation
+├── advanced_agent_default_embedder.py  # Advanced agent with LanceDB (default embedder)
+├── advanced_agent_huggingface_embeddings.py  # Advanced agent with Huggingface embeddings
+├── test_advanced_agent_default_embedder.py   # Test script for advanced agent (default embedder)
+├── test_advanced_agent_huggingface_embeddings.py  # Test script for advanced agent (Huggingface embeddings)
+├── demo_huggingface_embeddings.py      # Demo script for Huggingface embeddings
+├── requirements.txt                    # Python dependencies
+├── README.md                          # This file
+├── tmp/                               # Generated files (auto-created)
+│   ├── agent.db                      # SQLite session storage (basic)
+│   ├── agent_advanced_default.db     # SQLite session storage (advanced default)
+│   ├── agent_advanced_huggingface.db # SQLite session storage (advanced huggingface)
+│   ├── lancedb_advanced_default/     # LanceDB vector database (advanced default)
+│   └── lancedb_advanced_huggingface/ # LanceDB vector database (advanced huggingface)
+└── .gitignore                         # Git ignore file
 ```
 
 ## Configuration
 
-### Knowledge Base
+### Knowledge Base (Basic)
 - **Source**: Agno documentation from `https://docs.agno.com/introduction.md`
 - **Vector DB**: Built-in Agno vector storage
 - **Embeddings**: Default Agno embeddings (OpenAI compatible)
+
+### Knowledge Base (Advanced)
+- **Source**: Agno documentation from `https://docs.agno.com/introduction.md`
+- **Vector DB**: LanceDB with hybrid search
+- **Embeddings**: Agno default embeddings (OpenAI compatible)
+
+### Knowledge Base (Advanced with Embeddings)
+- **Source**: Agno documentation from `https://docs.agno.com/introduction.md`
+- **Vector DB**: LanceDB with hybrid search
+- **Embeddings**: Custom Huggingface sentence-transformers/all-MiniLM-L6-v2
+- **Fallback**: Hash-based embedding system for robustness
 
 ### Storage
 - **Database**: SQLite with table `agent_sessions`
@@ -142,7 +201,7 @@ storage = SqliteStorage(
 
 ### Common Issues
 
-1. **API Keys**: Ensure `DEEPSEEK_API_KEY` is set
+1. **API Keys**: Ensure both `DEEPSEEK_API_KEY` and `OPENAI_API_KEY` are set
 2. **First Run**: Knowledge loading may take time on first execution
 3. **Storage**: Check `tmp/` directory for generated files
 
